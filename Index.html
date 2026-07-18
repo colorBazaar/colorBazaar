@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>রঙিন বাজার</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f0f2f5}
+.navbar{background:#FF6B6B;padding:15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.brand{color:white;font-size:22px;font-weight:bold}
+.nav-links{display:flex;gap:15px}
+.nav-links a{color:white;text-decoration:none;font-weight:bold;cursor:pointer}
+.hero{background:linear-gradient(135deg,#667eea,#764ba2);color:white;text-align:center;padding:60px 20px}
+.hero h1{font-size:36px;margin-bottom:10px}
+.btn{background:#FF6B6B;color:white;padding:15px 30px;border:none;border-radius:25px;font-size:16px;cursor:pointer;margin-top:20px}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:20px;max-width:600px;margin:0 auto}
+.product{background:white;border-radius:15px;padding:15px;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,0.1)}
+.product-emoji{font-size:50px}
+.product-name{font-weight:bold;margin:10px 0}
+.product-price{color:#FF6B6B;font-size:20px;font-weight:bold}
+.add-btn{background:#4ECDC4;color:white;border:none;padding:10px;border-radius:20px;width:100%;cursor:pointer;font-weight:bold;margin-top:10px}
+.page{display:none;padding:20px;max-width:600px;margin:0 auto}
+.page.active{display:block}
+.cart-item{background:white;border-radius:10px;padding:15px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.cart-item-emoji{font-size:40px}
+.cart-item-details{flex:1}
+.qty-btn{background:#f0f0f0;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-weight:bold}
+.remove-btn{background:#FF6B6B;color:white;border:none;padding:5px 15px;border-radius:15px;cursor:pointer}
+.empty-cart{text-align:center;padding:60px 20px}
+.empty-cart-icon{font-size:80px}
+.toast{position:fixed;bottom:20px;right:20px;background:#22C55E;color:white;padding:15px 25px;border-radius:10px;font-weight:bold;transform:translateX(400px);transition:0.3s;z-index:2000}
+.toast.show{transform:translateX(0)}
+.footer{background:#1E293B;color:white;text-align:center;padding:30px;margin-top:40px}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="brand">🛍️ রঙিন বাজার</div>
+<div class="nav-links">
+<a onclick="showPage('home')">হোম</a>
+<a onclick="showPage('cart')">🛒 কার্ট <span id="cartCount">0</span></a>
+</div>
+</nav>
+
+<div class="page active" id="home-page">
+<div class="hero">
+<h1>🎨 রঙিন বাজার</h1>
+<p>সেরা পণ্য সেরা মূল্যে</p>
+<button class="btn" onclick="showPage('cart')">🛒 কেনাকাটা করুন</button>
+</div>
+<div class="products">
+<div class="product">
+<div class="product-emoji">👕</div>
+<div class="product-name">টি-শার্ট</div>
+<div class="product-price">৳450</div>
+<button class="add-btn" onclick="addToCart(1,'টি-শার্ট',450,'👕')">কার্টে যোগ</button>
+</div>
+<div class="product">
+<div class="product-emoji">🎧</div>
+<div class="product-name">হেডফোন</div>
+<div class="product-price">৳1200</div>
+<button class="add-btn" onclick="addToCart(2,'হেডফোন',1200,'🎧')">কার্টে যোগ</button>
+</div>
+<div class="product">
+<div class="product-emoji">👟</div>
+<div class="product-name">জুতা</div>
+<div class="product-price">৳1800</div>
+<button class="add-btn" onclick="addToCart(3,'জুতা',1800,'👟')">কার্টে যোগ</button>
+</div>
+<div class="product">
+<div class="product-emoji">💄</div>
+<div class="product-name">লিপস্টিক</div>
+<div class="product-price">৳350</div>
+<button class="add-btn" onclick="addToCart(4,'লিপস্টিক',350,'💄')">কার্টে যোগ</button>
+</div>
+</div>
+</div>
+
+<div class="page" id="cart-page">
+<h2 style="text-align:center;margin-bottom:20px">🛒 কার্ট</h2>
+<div id="cartItems"></div>
+<div id="emptyCart" class="empty-cart">
+<div class="empty-cart-icon">🛒</div>
+<h3>কার্ট খালি!</h3>
+<button class="btn" onclick="showPage('home')">কেনাকাটা করুন</button>
+</div>
+<div id="cartSummary" style="display:none;background:white;padding:20px;border-radius:10px;margin-top:20px">
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee">
+<span>মোট:</span><span id="subtotal">৳0</span>
+</div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee">
+<span>ডেলিভারি:</span><span id="delivery">৳0</span>
+</div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;font-size:20px;font-weight:bold;color:#FF6B6B">
+<span>সর্বমোট:</span><span id="total">৳0</span>
+</div>
+<button class="btn" style="width:100%;margin-top:15px;background:#22C55E">💳 অর্ডার করুন</button>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="footer">
+<p>🛍️ রঙিন বাজার | ColorBazaar</p>
+<p>© 2026</p>
+</div>
+
+<script>
+let cart = [];
+function showPage(page){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(page+'-page').classList.add('active');
+if(page==='cart')renderCart();
+}
+function addToCart(id,name,price,emoji){
+let item = cart.find(i=>i.id===id);
+if(item){item.qty++}else{cart.push({id,name,price,emoji,qty:1})}
+updateCartCount();
+showToast('✅ '+name+' যোগ হয়েছে!');
+}
+function updateCartCount(){
+let total = cart.reduce((sum,i)=>sum+i.qty,0);
+document.getElementById('cartCount').textContent = total;
+}
+function renderCart(){
+let container = document.getElementById('cartItems');
+let empty = document.getElementById('emptyCart');
+let summary = document.getElementById('cartSummary');
+if(cart.length===0){
+container.innerHTML='';
+empty.style.display='block';
+summary.style.display='none';
+return;
+}
+empty.style.display='none';
+summary.style.display='block';
+container.innerHTML = cart.map(item=>`
+<div class="cart-item">
+<div class="cart-item-emoji">${item.emoji}</div>
+<div class="cart-item-details">
+<div style="font-weight:bold">${item.name}</div>
+<div style="color:#FF6B6B;font-weight:bold">৳${item.price}</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px">
+<button class="qty-btn" onclick="updateQty(${item.id},-1)">-</button>
+<span style="font-weight:bold">${item.qty}</span>
+<button class="qty-btn" onclick="updateQty(${item.id},1)">+</button>
+</div>
+<div style="font-weight:bold;color:#FF6B6B">৳${item.price*item.qty}</div>
+<button class="remove-btn" onclick="removeItem(${item.id})">🗑️</button>
+</div>
+`).join('');
+let subtotal = cart.reduce((sum,i)=>sum+i.price*i.qty,0);
+let delivery = subtotal>=500?0:60;
+document.getElementById('subtotal').textContent='৳'+subtotal;
+document.getElementById('delivery').textContent=delivery===0?'ফ্রি':'৳'+delivery;
+document.getElementById('total').textContent='৳'+(subtotal+delivery);
+}
+function updateQty(id,change){
+let item = cart.find(i=>i.id===id);
+if(item){
+item.qty += change;
+if(item.qty<=0)removeItem(id);
+else renderCart();
+updateCartCount();
+}
+}
+function removeItem(id){
+cart = cart.filter(i=>i.id!==id);
+renderCart();
+updateCartCount();
+showToast('🗑️ মুছে ফেলা হয়েছে');
+}
+function showToast(msg){
+let toast = document.getElementById('toast');
+toast.textContent = msg;
+toast.classList.add('show');
+setTimeout(()=>toast.classList.remove('show'),2000);
+}
+</script>
+
+</body>
+</html>
