@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রঙিন বাজার - ColorBazaar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh; 
+        }
+        .navbar { 
+            background: white; 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        .brand { 
+            font-size: 22px; 
+            font-weight: bold; 
+            color: #FF6B6B; 
+        }
+        .nav-links a { 
+            text-decoration: none; 
+            color: #333; 
+            margin-left: 15px; 
+            font-weight: 600; 
+            font-size: 14px; 
+        }
+        .hero { 
+            text-align: center; 
+            padding: 60px 20px; 
+            color: white; 
+        }
+        .hero h1 { 
+            font-size: 36px; 
+            margin-bottom: 10px; 
+        }
+        .hero p { 
+            font-size: 18px; 
+            margin-bottom: 20px; 
+        }
+        .btn { 
+            background: #FF6B6B; 
+            color: white; 
+            padding: 15px 30px; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 16px; 
+            cursor: pointer; 
+        }
+        .products { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            padding: 20px; 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .product-card { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 15px; 
+            text-align: center; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
+        }
+        .product-emoji { 
+            font-size: 50px; 
+            margin-bottom: 10px; 
+        }
+        .product-name { 
+            font-weight: bold; 
+            font-size: 14px; 
+            margin-bottom: 8px; 
+        }
+        .price { 
+            color: #FF6B6B; 
+            font-size: 20px; 
+            font-weight: bold; 
+        }
+        .cart-btn { 
+            background: #4ECDC4; 
+            color: white; 
+            border: none; 
+            padding: 8px 15px; 
+            border-radius: 8px; 
+            margin-top: 10px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 14px; 
+        }
+        .footer { 
+            background: #1E293B; 
+            color: white; 
+            text-align: center; 
+            padding: 20px; 
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">🛍️ রঙিন বাজার</div>
+        <div class="nav-links">
+            <a href="#">হোম</a>
+            <a href="#">পণ্য</a>
+            <a href="#">🛒 কার্ট</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>🎨 রঙিন জীবন, রঙিন পণ্য!</h1>
+        <p>Colorful Life, Colorful Products!</p>
+        <button class="btn">🛒 কেনাকাটা শুরু করুন</button>
+    </div>
+
+    <div class="products">
+        <div class="product-card">
+            <div class="product-emoji">👕</div>
+            <div class="product-name">স্টাইলিশ টি-শার্ট</div>
+            <div class="price">৳450</div>
+            <button class="cart-btn">কার্টে যোগ করুন</button>
+        </div>
+        <div class="product-card">
+            <div class="product-emoji">🎧</div>
+            <div class="product-name">ওয়্যারলেস হেডফোন</div>
+            <div class="price">৳1,200</div>
+            <button class="cart-btn">কার্টে যোগ করুন</button>
+        </div>
+        <div class="product-card">
+            <div class="product-emoji">👟</div>
+            <div class="product-name">রানিং শু</div>
+            <div class="price">৳1,800</div>
+            <button class="cart-btn">কার্টে যোগ করুন</button>
+        </div>
+        <div class="product-card">
+            <div class="product-emoji">💄</div>
+            <div class="product-name">লিপস্টিক সেট</div>
+            <div class="price">৳350</div>
+            <button class="cart-btn">কার্টে যোগ করুন</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🛍️ রঙিন বাজার | ColorBazaar</p>
+        <p>© 2026 - সবার জন্য সেরা পণ্য</p>
+    </div>
+
+</body>
+</html>
