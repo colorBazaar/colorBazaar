@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+# Create the complete HTML file with HTML + CSS + JavaScript
+html_code = '''<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -6,152 +8,464 @@
     <title>রঙিন বাজার - ColorBazaar</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            min-height: 100vh; 
-        }
-        .navbar { 
-            background: white; 
-            padding: 15px 20px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            position: sticky; 
-            top: 0; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
-        }
-        .brand { 
-            font-size: 22px; 
-            font-weight: bold; 
-            color: #FF6B6B; 
-        }
-        .nav-links a { 
-            text-decoration: none; 
-            color: #333; 
-            margin-left: 15px; 
-            font-weight: 600; 
-            font-size: 14px; 
-        }
-        .hero { 
-            text-align: center; 
-            padding: 60px 20px; 
-            color: white; 
-        }
-        .hero h1 { 
-            font-size: 36px; 
-            margin-bottom: 10px; 
-        }
-        .hero p { 
-            font-size: 18px; 
-            margin-bottom: 20px; 
-        }
-        .btn { 
-            background: #FF6B6B; 
-            color: white; 
-            padding: 15px 30px; 
-            border: none; 
-            border-radius: 10px; 
-            font-size: 16px; 
-            cursor: pointer; 
-        }
-        .products { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
-            padding: 20px; 
-            max-width: 800px; 
-            margin: 0 auto; 
-        }
-        .product-card { 
-            background: white; 
-            border-radius: 15px; 
-            padding: 15px; 
-            text-align: center; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
-        }
-        .product-emoji { 
-            font-size: 50px; 
-            margin-bottom: 10px; 
-        }
-        .product-name { 
-            font-weight: bold; 
-            font-size: 14px; 
-            margin-bottom: 8px; 
-        }
-        .price { 
-            color: #FF6B6B; 
-            font-size: 20px; 
-            font-weight: bold; 
-        }
-        .cart-btn { 
-            background: #4ECDC4; 
-            color: white; 
-            border: none; 
-            padding: 8px 15px; 
-            border-radius: 8px; 
-            margin-top: 10px; 
-            cursor: pointer; 
-            width: 100%; 
-            font-size: 14px; 
-        }
-        .footer { 
-            background: #1E293B; 
-            color: white; 
-            text-align: center; 
-            padding: 20px; 
-            margin-top: 20px; 
-        }
+        body { font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif; background: #f0f2f5; }
+        
+        /* Navbar */
+        .navbar { background: linear-gradient(135deg, #FF6B6B, #EE5A5A); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .brand { font-size: 24px; font-weight: bold; color: white; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: white; font-weight: 600; cursor: pointer; padding: 8px 15px; border-radius: 20px; transition: 0.3s; }
+        .nav-links a:hover { background: rgba(255,255,255,0.2); }
+        .cart-count { background: #FFE66D; color: #333; padding: 2px 8px; border-radius: 10px; font-size: 12px; margin-left: 5px; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-align: center; padding: 60px 20px; }
+        .hero h1 { font-size: 42px; margin-bottom: 10px; }
+        .hero p { font-size: 18px; margin-bottom: 20px; }
+        .btn { background: #FF6B6B; color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 16px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,107,107,0.4); }
+        
+        /* Products */
+        .products-section { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 28px; margin-bottom: 30px; color: #333; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .product-emoji { font-size: 60px; margin-bottom: 10px; }
+        .product-name { font-weight: bold; font-size: 16px; margin-bottom: 5px; color: #333; }
+        .product-price { color: #FF6B6B; font-size: 22px; font-weight: bold; margin-bottom: 10px; }
+        .add-cart-btn { background: #4ECDC4; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
+        .add-cart-btn:hover { background: #3DBDB4; }
+        .add-cart-btn.added { background: #22C55E; }
+        
+        /* Cart Page */
+        .page { display: none; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .page.active { display: block; }
+        .cart-item { background: white; border-radius: 10px; padding: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .cart-item-emoji { font-size: 40px; }
+        .cart-item-details { flex: 1; }
+        .cart-item-name { font-weight: bold; }
+        .cart-item-price { color: #FF6B6B; font-weight: bold; }
+        .qty-btn { background: #f0f0f0; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; }
+        .remove-btn { background: #FF6B6B; color: white; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; }
+        .cart-summary { background: white; border-radius: 10px; padding: 20px; margin-top: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .summary-row.total { font-size: 20px; font-weight: bold; color: #FF6B6B; border-top: 2px solid #FF6B6B; border-bottom: none; margin-top: 10px; }
+        .checkout-btn { background: #22C55E; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        
+        /* Checkout Page */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; }
+        .form-group input:focus { border-color: #FF6B6B; outline: none; }
+        .payment-options { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .payment-option { background: white; border: 2px solid #ddd; padding: 15px; border-radius: 10px; cursor: pointer; flex: 1; min-width: 120px; text-align: center; }
+        .payment-option.selected { border-color: #FF6B6B; background: #FFF0F0; }
+        
+        /* Login Page */
+        .auth-box { background: white; border-radius: 15px; padding: 30px; max-width: 400px; margin: 40px auto; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .auth-tabs { display: flex; margin-bottom: 20px; }
+        .auth-tab { flex: 1; padding: 10px; border: none; background: #f0f0f0; cursor: pointer; font-weight: bold; }
+        .auth-tab.active { background: #FF6B6B; color: white; }
+        .auth-form { display: none; }
+        .auth-form.active { display: block; }
+        
+        /* Toast */
+        .toast { position: fixed; bottom: 20px; right: 20px; background: #22C55E; color: white; padding: 15px 25px; border-radius: 10px; font-weight: bold; transform: translateX(400px); transition: 0.3s; z-index: 2000; }
+        .toast.show { transform: translateX(0); }
+        
+        /* Success Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 3000; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; border-radius: 20px; padding: 40px; text-align: center; max-width: 400px; }
+        .modal-content h2 { color: #22C55E; margin-bottom: 10px; }
+        
+        /* Footer */
+        .footer { background: #1E293B; color: white; text-align: center; padding: 30px; margin-top: 40px; }
+        
+        .empty-cart { text-align: center; padding: 60px 20px; }
+        .empty-cart-icon { font-size: 80px; margin-bottom: 20px; }
+        .back-btn { background: #667eea; color: white; border: none; padding: 12px 25px; border-radius: 20px; cursor: pointer; margin-top: 15px; }
     </style>
 </head>
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="brand">🛍️ রঙিন বাজার</div>
         <div class="nav-links">
-            <a href="#">হোম</a>
-            <a href="#">পণ্য</a>
-            <a href="#">🛒 কার্ট</a>
+            <a onclick="showPage('home')">🏠 হোম</a>
+            <a onclick="showPage('products')">🛍️ পণ্য</a>
+            <a onclick="showPage('cart')">🛒 কার্ট <span class="cart-count" id="cartBadge">0</span></a>
+            <a onclick="showPage('login')">👤 লগইন</a>
         </div>
     </nav>
 
-    <div class="hero">
-        <h1>🎨 রঙিন জীবন, রঙিন পণ্য!</h1>
-        <p>Colorful Life, Colorful Products!</p>
-        <button class="btn">🛒 কেনাকাটা শুরু করুন</button>
-    </div>
-
-    <div class="products">
-        <div class="product-card">
-            <div class="product-emoji">👕</div>
-            <div class="product-name">স্টাইলিশ টি-শার্ট</div>
-            <div class="price">৳450</div>
-            <button class="cart-btn">কার্টে যোগ করুন</button>
+    <!-- Home Page -->
+    <div class="page active" id="home-page">
+        <div class="hero">
+            <h1>🎨 রঙিন জীবন, রঙিন পণ্য!</h1>
+            <p>Colorful Life, Colorful Products! সেরা মূল্যে সেরা পণ্য কিনুন</p>
+            <button class="btn" onclick="showPage('products')">🛒 কেনাকাটা শুরু করুন</button>
         </div>
-        <div class="product-card">
-            <div class="product-emoji">🎧</div>
-            <div class="product-name">ওয়্যারলেস হেডফোন</div>
-            <div class="price">৳1,200</div>
-            <button class="cart-btn">কার্টে যোগ করুন</button>
-        </div>
-        <div class="product-card">
-            <div class="product-emoji">👟</div>
-            <div class="product-name">রানিং শু</div>
-            <div class="price">৳1,800</div>
-            <button class="cart-btn">কার্টে যোগ করুন</button>
-        </div>
-        <div class="product-card">
-            <div class="product-emoji">💄</div>
-            <div class="product-name">লিপস্টিক সেট</div>
-            <div class="price">৳350</div>
-            <button class="cart-btn">কার্টে যোগ করুন</button>
+        <div class="products-section">
+            <h2 class="section-title">🔥 জনপ্রিয় পণ্য</h2>
+            <div class="products-grid" id="featured-products"></div>
         </div>
     </div>
 
+    <!-- Products Page -->
+    <div class="page" id="products-page">
+        <div class="products-section">
+            <h2 class="section-title">🛍️ সব পণ্য</h2>
+            <div class="products-grid" id="all-products"></div>
+        </div>
+    </div>
+
+    <!-- Cart Page -->
+    <div class="page" id="cart-page">
+        <h2 class="section-title">🛒 আপনার কার্ট</h2>
+        <div id="cart-items"></div>
+        <div class="cart-summary" id="cart-summary" style="display:none;">
+            <div class="summary-row">
+                <span>মোট:</span>
+                <span id="subtotal">৳0</span>
+            </div>
+            <div class="summary-row">
+                <span>ডেলিভারি:</span>
+                <span id="delivery">৳0</span>
+            </div>
+            <div class="summary-row total">
+                <span>সর্বমোট:</span>
+                <span id="total">৳0</span>
+            </div>
+            <button class="checkout-btn" onclick="showPage('checkout')">💳 চেকআউট করুন</button>
+        </div>
+        <div class="empty-cart" id="empty-cart">
+            <div class="empty-cart-icon">🛒</div>
+            <h3>কার্ট খালি!</h3>
+            <p>আপনার কার্টে কোনো পণ্য নেই</p>
+            <button class="back-btn" onclick="showPage('products')">🛍️ কেনাকাটা করুন</button>
+        </div>
+    </div>
+
+    <!-- Checkout Page -->
+    <div class="page" id="checkout-page">
+        <h2 class="section-title">💳 চেকআউট</h2>
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div class="form-group">
+                <label>👤 পূর্ণ নাম</label>
+                <input type="text" placeholder="আপনার নাম" id="customerName">
+            </div>
+            <div class="form-group">
+                <label>📱 মোবাইল</label>
+                <input type="tel" placeholder="01XXXXXXXXX" id="customerPhone">
+            </div>
+            <div class="form-group">
+                <label>📍 ঠিকানা</label>
+                <textarea rows="3" placeholder="আপনার সম্পূর্ণ ঠিকানা" id="customerAddress"></textarea>
+            </div>
+            <h3 style="margin: 20px 0;">💳 পেমেন্ট পদ্ধতি</h3>
+            <div class="payment-options">
+                <div class="payment-option selected" onclick="selectPayment(this)">
+                    💳 কার্ড
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    📱 বিকাশ
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    📲 নগদ
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    🚚 ক্যাশ অন ডেলিভারি
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="placeOrder()">✅ অর্ডার কনফার্ম করুন</button>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div class="page" id="login-page">
+        <div class="auth-box">
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="showAuthTab('login')">লগইন</button>
+                <button class="auth-tab" onclick="showAuthTab('register')">রেজিস্টার</button>
+            </div>
+            <div class="auth-form active" id="login-form">
+                <div class="form-group">
+                    <label>📧 ইমেইল</label>
+                    <input type="email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>🔒 পাসওয়ার্ড</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <button class="checkout-btn" onclick="login()">🔓 লগইন</button>
+            </div>
+            <div class="auth-form" id="register-form">
+                <div class="form-group">
+                    <label>👤 পূর্ণ নাম</label>
+                    <input type="text" placeholder="আপনার নাম">
+                </div>
+                <div class="form-group">
+                    <label>📧 ইমেইল</label>
+                    <input type="email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>📱 মোবাইল</label>
+                    <input type="tel" placeholder="01XXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>🔒 পাসওয়ার্ড</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <button class="checkout-btn" onclick="register()">✅ রেজিস্টার</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
+            <h2>অভিনন্দন!</h2>
+            <p>আপনার অর্ডার সফলভাবে সম্পন্ন হয়েছে!</p>
+            <p style="color: #666; margin-top: 10px;">অর্ডার আইডি: <strong id="orderId">#ORD-001</strong></p>
+            <button class="btn" onclick="closeModal()" style="margin-top: 20px;">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
     <div class="footer">
         <p>🛍️ রঙিন বাজার | ColorBazaar</p>
         <p>© 2026 - সবার জন্য সেরা পণ্য</p>
     </div>
+
+    <script>
+        // Products Data
+        const products = [
+            { id: 1, name: "স্টাইলিশ টি-শার্ট", price: 450, emoji: "👕" },
+            { id: 2, name: "ওয়্যারলেস হেডফোন", price: 1200, emoji: "🎧" },
+            { id: 3, name: "রানিং শু", price: 1800, emoji: "👟" },
+            { id: 4, name: "লিপস্টিক সেট", price: 350, emoji: "💄" },
+            { id: 5, name: "স্মার্ট ওয়াচ", price: 2500, emoji: "⌚" },
+            { id: 6, name: "ব্যাকপ্যাক", price: 800, emoji: "🎒" },
+            { id: 7, name: "স্মার্টফোন", price: 15000, emoji: "📱" },
+            { id: 8, name: "পারফিউম", price: 2200, emoji: "🌸" },
+        ];
+
+        let cart = [];
+
+        // Show Page
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageName + '-page').classList.add('active');
+            window.scrollTo(0, 0);
+            
+            if (pageName === 'cart') renderCart();
+            if (pageName === 'products' || pageName === 'home') renderProducts();
+        }
+
+        // Render Products
+        function renderProducts() {
+            const featuredContainer = document.getElementById('featured-products');
+            const allContainer = document.getElementById('all-products');
+            
+            const html = products.map(p => `
+                <div class="product-card">
+                    <div class="product-emoji">${p.emoji}</div>
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-price">৳${p.price}</div>
+                    <button class="add-cart-btn" id="btn-${p.id}" onclick="addToCart(${p.id})">🛒 কার্টে যোগ করুন</button>
+                </div>
+            `).join('');
+            
+            if (featuredContainer) featuredContainer.innerHTML = html;
+            if (allContainer) allContainer.innerHTML = html;
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+            
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            updateCartBadge();
+            showToast(`✅ ${product.name} কার্টে যোগ হয়েছে!`);
+            
+            // Change button text temporarily
+            const btn = document.getElementById('btn-' + productId);
+            if (btn) {
+                btn.textContent = '✅ যোগ হয়েছে';
+                btn.classList.add('added');
+                setTimeout(() => {
+                    btn.textContent = '🛒 কার্টে যোগ করুন';
+                    btn.classList.remove('added');
+                }, 2000);
+            }
+        }
+
+        // Update Cart Badge
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartBadge').textContent = totalItems;
+        }
+
+        // Render Cart
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const summary = document.getElementById('cart-summary');
+            const emptyCart = document.getElementById('empty-cart');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                summary.style.display = 'none';
+                emptyCart.style.display = 'block';
+                return;
+            }
+            
+            emptyCart.style.display = 'none';
+            summary.style.display = 'block';
+            
+            container.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-emoji">${item.emoji}</div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">৳${item.price}</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <button class="qty-btn" onclick="updateQty(${item.id}, -1)">−</button>
+                        <span style="font-weight:bold;">${item.quantity}</span>
+                        <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+                    </div>
+                    <div style="font-weight:bold; color:#FF6B6B;">৳${item.price * item.quantity}</div>
+                    <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️</button>
+                </div>
+            `).join('');
+            
+            updateCartTotals();
+        }
+
+        // Update Quantity
+        function updateQty(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    renderCart();
+                    updateCartBadge();
+                }
+            }
+        }
+
+        // Remove from Cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            renderCart();
+            updateCartBadge();
+            showToast('🗑️ পণ্য মুছে ফেলা হয়েছে');
+        }
+
+        // Update Cart Totals
+        function updateCartTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const delivery = subtotal >= 500 ? 0 : 60;
+            const total = subtotal + delivery;
+            
+            document.getElementById('subtotal').textContent = '৳' + subtotal;
+            document.getElementById('delivery').textContent = delivery === 0 ? 'ফ্রি' : '৳' + delivery;
+            document.getElementById('total').textContent = '৳' + total;
+        }
+
+        // Select Payment
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        // Place Order
+        function placeOrder() {
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+            
+            if (!name || !phone || !address) {
+                showToast('⚠️ সব তথ্য পূরণ করুন!');
+                return;
+            }
+            
+            if (cart.length === 0) {
+                showToast('⚠️ কার্ট খালি!');
+                return;
+            }
+            
+            const orderId = '#ORD-' + Math.floor(Math.random() * 10000);
+            document.getElementById('orderId').textContent = orderId;
+            document.getElementById('successModal').classList.add('active');
+            
+            cart = [];
+            updateCartBadge();
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+            showPage('home');
+        }
+
+        // Show Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Auth Tabs
+        function showAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tab + '-form').classList.add('active');
+        }
+
+        // Login
+        function login() {
+            showToast('✅ সফলভাবে লগইন হয়েছে!');
+            setTimeout(() => showPage('home'), 1000);
+        }
+
+        // Register
+        function register() {
+            showToast('✅ রেজিস্ট্রেশন সফল!');
+            setTimeout(() => showAuthTab('login'), 1000);
+        }
+
+        // Initialize
+        renderProducts();
+    </script>
+
+</body>
+</html>'''
+
+# Save to file
+with open('/mnt/agents/output/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_code)
+
+print("✅ File created successfully!")
+print(f"📄 Total lines: {len(html_code.splitlines())}")
+print(f"📦 Size: {len(html_code)} characters")    </div>
 
 </body>
 </html>
